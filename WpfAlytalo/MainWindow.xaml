@@ -6,6 +6,23 @@
         xmlns:local="clr-namespace:WpfAlytalo"
         mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="600">
+
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="3"  BorderBrush="#000" BorderThickness="1,1,1,1" >
+                            <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    
     <Grid Background="MintCream">
 
         <Polygon Points="60,140 300,30 540,140" 
@@ -14,7 +31,9 @@
         <Label x:Name="lblOtsikko" Content="Ä L Y T A L O" HorizontalAlignment="Left" Margin="207,91,0,0" VerticalAlignment="Top" Height="52" Width="200" FontFamily="Calibri" FontSize="36" FontWeight="Bold" Foreground="LightSteelBlue" RenderTransformOrigin="0.561,0.065"/>
         <Border BorderBrush="LightSteelBlue" BorderThickness="2" HorizontalAlignment="Left" Height="220" Margin="76,171,0,0" VerticalAlignment="Top" Width="215"/>
         <Border BorderBrush="LightSteelBlue" BorderThickness="2" HorizontalAlignment="Left" Height="220" Margin="310,171,0,0" VerticalAlignment="Top" Width="215"/>
-
+        
+        <Button Content="Button" HorizontalAlignment="Left" Margin="98,225,0,0" VerticalAlignment="Top" Width="69" BorderBrush="LightSteelBlue" Background="LightSteelBlue" Height="36" FontFamily="Calibri"/>
+        
 
     </Grid>
 </Window>
