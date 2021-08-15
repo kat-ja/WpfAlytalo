@@ -67,6 +67,11 @@ namespace WpfAlytalo
                 olohuone.Switched = true;
                 tbOlohuoneInfo.Text = "Olohuoneen valot päällä. Himmentimen asento: " + olohuone.Dimmer + "."; ;
             }
-        }      
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }
