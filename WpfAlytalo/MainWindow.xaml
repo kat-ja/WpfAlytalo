@@ -38,18 +38,19 @@
         <Slider x:Name="slOlohuone" HorizontalAlignment="Left" Margin="96,292,0,0" VerticalAlignment="Top" Height="21" Width="167" ValueChanged="slOlohuone_ValueChanged" Maximum="100"/>
         <Label x:Name="lblSlider" Content="---" HorizontalAlignment="Left" Margin="96,262,0,0" VerticalAlignment="Top" Height="25" Width="116"/>
         <Border BorderBrush="LightSteelBlue" BorderThickness="2" HorizontalAlignment="Left" Height="220" Margin="76,410,0,0" VerticalAlignment="Top" Width="215">
-            <Label x:Name="lblLampotilaTavoite" Content="Tavoitelämpötila" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20.4,96.4,0,0"/>
+            <Label x:Name="lblLampotilaTavoite" Content="Tavoitelämpötila:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="21.4,75.4,0,0"/>
         </Border>
         <Border BorderBrush="LightSteelBlue" BorderThickness="2" HorizontalAlignment="Left" Height="220" Margin="310,410,0,0" VerticalAlignment="Top" Width="215"/>
         <Label x:Name="lblLampotila" Content="LÄMPÖTILA" HorizontalAlignment="Left" Margin="92,429,0,0" VerticalAlignment="Top" Height="29" Width="106"/>
         <Label x:Name="lblSauna" Content="SAUNA" HorizontalAlignment="Left" Margin="334,432,0,0" VerticalAlignment="Top"/>
-        <TextBlock x:Name="tbLampotilaNyt" HorizontalAlignment="Left" Margin="103,483,0,0" TextWrapping="Wrap" Text="20" VerticalAlignment="Top" Height="28" Width="80"/>
-        <Label x:Name="lblLampotilaNyt" Content="Lämpotila nyt" HorizontalAlignment="Left" Margin="96,457,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tbLampotilaTavoite" HorizontalAlignment="Left" Height="23" Margin="103,533,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged"/>
-        <Button x:Name="btnLampotila" Content="Aseta lämpötila" HorizontalAlignment="Left" Margin="96,574,0,0" VerticalAlignment="Top" Width="137" BorderBrush="LightSteelBlue" Background="LightSteelBlue" Height="36" FontFamily="Calibri"/>
-        <Button x:Name="btnSauna" Content="Käytä saunaa" HorizontalAlignment="Left" Margin="334,463,0,0" VerticalAlignment="Top" Width="137" BorderBrush="LightSteelBlue" Background="LightSteelBlue" Height="36" FontFamily="Calibri"/>
+        <TextBlock x:Name="tbLampotilaNyt" HorizontalAlignment="Left" Margin="183,463,0,0" TextWrapping="Wrap" Text="20" VerticalAlignment="Top" Height="20" Width="29"/>
+        <Label x:Name="lblLampotilaNyt" Content="Lämpotila nyt:" HorizontalAlignment="Left" Margin="96,457,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnLampotila" Content="Aseta lämpötila" HorizontalAlignment="Left" Margin="96,574,0,0" VerticalAlignment="Top" Width="137" BorderBrush="LightSteelBlue" Background="LightSteelBlue" Height="36" FontFamily="Calibri" Click="btnLampotila_Click"/>
+        <Button x:Name="btnSauna" Content="Käytä saunaa" HorizontalAlignment="Left" Margin="334,463,0,0" VerticalAlignment="Top" Width="137" BorderBrush="LightSteelBlue" Background="LightSteelBlue" Height="36" FontFamily="Calibri" Click="btnSauna_Click"/>
         <Label x:Name="lblSaunaPaalla" Content="Sauna päällä" HorizontalAlignment="Left" Margin="334,515,0,0" VerticalAlignment="Top" Height="28" Width="137"/>
         <Label x:Name="lblLampotilaSauna" Content="---" HorizontalAlignment="Left" Margin="347,548,0,0" VerticalAlignment="Top" Height="25" Width="73"/>
+        <TextBox x:Name="tbLampotilaTavoite" HorizontalAlignment="Left" Height="23" Margin="205,488,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="58"/>
+        <Label x:Name="lblTavoiteInfo" Content="" HorizontalAlignment="Left" Margin="96,517,0,0" VerticalAlignment="Top" Height="52" Width="167"/>
 
 
     </Grid>

@@ -22,6 +22,7 @@ namespace WpfAlytalo
     {
         Lights olohuone = new Lights();
         Lights keittio = new Lights();
+        Thermostat talo = new Thermostat();
 
         public MainWindow()
         {
@@ -29,6 +30,9 @@ namespace WpfAlytalo
             tbOlohuoneInfo.Text = "Olohuoneen valot päällä.";
             olohuone.Switched = true;
             slOlohuone.Value = 100;
+
+            talo.SetTemperature(22);
+            tbLampotilaNyt.Text = talo.Temperature.ToString();
         }
 
         private void btnOlohuone_Click(object sender, RoutedEventArgs e)
@@ -69,7 +73,40 @@ namespace WpfAlytalo
             }
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void tbLampotilaTavoite_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            
+        }
+
+        private void btnLampotila_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                talo.SetTemperature(int.Parse(tbLampotilaTavoite.Text));
+
+                if(talo.Temperature >= 5 && talo.Temperature <= 35)
+                {
+                    tbLampotilaNyt.Text = talo.Temperature.ToString();
+                    tbLampotilaTavoite.Text = "";
+                    lblTavoiteInfo.Content = "";
+                }
+                else
+                {
+                    lblTavoiteInfo.Content = "Lämpötilan pitää olla luku\nvälillä 5-35.";
+                    tbLampotilaTavoite.Text = "";
+                    tbLampotilaTavoite.Focus();
+                }
+                
+            }
+            catch (Exception)
+            {
+                lblTavoiteInfo.Content = "Lämpötilan pitää olla luku\nvälillä 5-35.";
+                tbLampotilaTavoite.Text = "";
+                tbLampotilaTavoite.Focus();
+            }
+            
+        }
+        private void btnSauna_Click(object sender, RoutedEventArgs e)
         {
 
         }
