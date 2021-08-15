@@ -20,9 +20,56 @@ namespace WpfAlytalo
     /// </summary>
     public partial class MainWindow : Window
     {
+        Lights olohuone = new Lights();
+        Lights keittio = new Lights();
+
         public MainWindow()
         {
-            InitializeComponent();
+            InitializeComponent();     
         }
+
+        private void btnOlohuone_Click(object sender, RoutedEventArgs e)
+        {
+            if (olohuone.Switched)
+            {
+                btnOlohuone.Content = "Sytytä valot";
+                olohuone.Switched = false;
+                //olohuone.Dimmer = "0";
+                tbOlohuoneInfo.Text = "Olohuoneen valot sammutettu.";
+                //slOlohuone.Value = int.Parse(olohuone.Dimmer);
+            }
+            else
+            {
+                btnOlohuone.Content = "Sammuta valot";
+                olohuone.Switched = true;
+                //olohuone.Dimmer = "100";
+                tbOlohuoneInfo.Text = "Olohuoneen valot päällä.";
+                
+            }
+            
+            
+        }
+
+        private void slOlohuone_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            var slider = sender as Slider;
+
+            olohuone.Dimmer = Math.Round(slider.Value).ToString();
+            lblSlider.Content = olohuone.Dimmer;
+            
+            if(slider.Value == 0)
+            {
+                btnOlohuone.Content = "Sytytä valot";
+                olohuone.Switched = false;
+                tbOlohuoneInfo.Text = "Olohuoneen valot sammutettu. Himmentimen asento: " + olohuone.Dimmer +".";
+            }else
+            {
+                btnOlohuone.Content = "Sammuta valot";
+                olohuone.Switched = true;
+                tbOlohuoneInfo.Text = "Olohuoneen valot päällä. Himmentimen asento: " + olohuone.Dimmer + "."; ;
+            }
+        }
+        
+        
     }
 }
