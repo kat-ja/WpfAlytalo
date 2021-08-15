@@ -25,7 +25,10 @@ namespace WpfAlytalo
 
         public MainWindow()
         {
-            InitializeComponent();     
+            InitializeComponent();
+            tbOlohuoneInfo.Text = "Olohuoneen valot päällä.";
+            olohuone.Switched = true;
+            slOlohuone.Value = 100;
         }
 
         private void btnOlohuone_Click(object sender, RoutedEventArgs e)
@@ -33,21 +36,17 @@ namespace WpfAlytalo
             if (olohuone.Switched)
             {
                 btnOlohuone.Content = "Sytytä valot";
-                olohuone.Switched = false;
-                //olohuone.Dimmer = "0";
+                olohuone.Switched = false;             
                 tbOlohuoneInfo.Text = "Olohuoneen valot sammutettu.";
-                //slOlohuone.Value = int.Parse(olohuone.Dimmer);
+                slOlohuone.Value = 0;
             }
             else
             {
                 btnOlohuone.Content = "Sammuta valot";
-                olohuone.Switched = true;
-                //olohuone.Dimmer = "100";
+                olohuone.Switched = true;              
                 tbOlohuoneInfo.Text = "Olohuoneen valot päällä.";
-                
-            }
-            
-            
+                slOlohuone.Value = 100;
+            }        
         }
 
         private void slOlohuone_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -68,8 +67,6 @@ namespace WpfAlytalo
                 olohuone.Switched = true;
                 tbOlohuoneInfo.Text = "Olohuoneen valot päällä. Himmentimen asento: " + olohuone.Dimmer + "."; ;
             }
-        }
-        
-        
+        }      
     }
 }

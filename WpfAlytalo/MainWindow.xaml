@@ -34,7 +34,7 @@
 
         <Button x:Name="btnOlohuone" Content="Sammuta valot" HorizontalAlignment="Left" Margin="96,221,0,0" VerticalAlignment="Top" Width="137" BorderBrush="LightSteelBlue" Background="LightSteelBlue" Height="36" FontFamily="Calibri" Click="btnOlohuone_Click"/>
         <Label x:Name="lblOlohuone" Content="OLOHUONE" HorizontalAlignment="Left" Margin="96,188,0,0" VerticalAlignment="Top" Height="28" Width="102"/>
-        <TextBlock x:Name="tbOlohuoneInfo" HorizontalAlignment="Left" Margin="96,332,0,0" TextWrapping="Wrap" Text="Olohuone info" VerticalAlignment="Top" Height="40" Width="167"/>
+        <TextBlock x:Name="tbOlohuoneInfo" HorizontalAlignment="Left" Margin="96,332,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="40" Width="167"/>
         <Slider x:Name="slOlohuone" HorizontalAlignment="Left" Margin="96,292,0,0" VerticalAlignment="Top" Height="21" Width="167" ValueChanged="slOlohuone_ValueChanged" Maximum="100"/>
         <Label x:Name="lblSlider" Content="---" HorizontalAlignment="Left" Margin="96,262,0,0" VerticalAlignment="Top" Height="25" Width="116"/>
 
