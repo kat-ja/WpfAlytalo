@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace WpfAlytalo
 {
@@ -23,6 +24,10 @@ namespace WpfAlytalo
         Lights olohuone = new Lights();
         Lights keittio = new Lights();
         Thermostat talo = new Thermostat();
+        Sauna sauna = new Sauna();
+
+        public DispatcherTimer SaunanLammitin = new DispatcherTimer();
+        public DispatcherTimer SaunanKylmetin = new DispatcherTimer();
 
         public MainWindow()
         {
@@ -33,8 +38,43 @@ namespace WpfAlytalo
 
             talo.SetTemperature(22);
             tbLampotilaNyt.Text = talo.Temperature.ToString();
+
+            sauna.Switched = false;
+            sauna.SaunaTempe = talo.Temperature;
+
+            SaunanLammitin.Tick += SaunanLammitin_Tick;
+            SaunanLammitin.Interval = new TimeSpan(0, 0, 0, 2); // 2 sekuntia -> 1 asteen nousu
+
+            SaunanKylmetin.Tick += SaunanKylmetin_Tick;
+            SaunanKylmetin.Interval = new TimeSpan(0, 0, 0, 1); // 1 sekuntia -> 1 asteen lasku
         }
 
+        private void SaunanLammitin_Tick(object sender, EventArgs e)
+        {
+            if(sauna.SaunaTempe < 26)
+            {
+                sauna.SaunaTempe += 1;
+                lblLampotilaSauna.Content = sauna.SaunaTempe;
+            }
+            else
+            {
+                SaunanLammitin.Stop();
+            }
+
+        }
+        private void SaunanKylmetin_Tick(object sender, EventArgs e)
+        {
+            if (sauna.SaunaTempe > talo.Temperature)
+            {
+                sauna.SaunaTempe -= 1;
+                lblLampotilaSauna.Content = sauna.SaunaTempe;
+            }
+            else
+            {
+                SaunanKylmetin.Stop();
+            }
+
+        }
         private void btnOlohuone_Click(object sender, RoutedEventArgs e)
         {
             if (olohuone.Switched)
@@ -87,6 +127,8 @@ namespace WpfAlytalo
                 if(talo.Temperature >= 5 && talo.Temperature <= 35)
                 {
                     tbLampotilaNyt.Text = talo.Temperature.ToString();
+                    sauna.SaunaTempe = talo.Temperature;
+                    lblLampotilaSauna.Content = talo.Temperature.ToString();
                     tbLampotilaTavoite.Text = "";
                     lblTavoiteInfo.Content = "";
                 }
@@ -108,7 +150,22 @@ namespace WpfAlytalo
         }
         private void btnSauna_Click(object sender, RoutedEventArgs e)
         {
-
+            if (sauna.Switched)
+            {
+                sauna.SaunaOff();
+                lblKiuasPaalla.Content = "Kiuas ei toiminnassa.";
+                btnSauna.Content = "Sauna päälle";
+                SaunanKylmetin.Start();
+                
+            }
+            else
+            {
+                sauna.SaunaOn();
+                lblKiuasPaalla.Content = "Kiuas toiminnassa.";
+                btnSauna.Content = "Sauna pois päältä";
+                SaunanLammitin.Start();
+                lblLampotilaSauna.Content = sauna.SaunaTempe;
+            }
         }
     }
 }

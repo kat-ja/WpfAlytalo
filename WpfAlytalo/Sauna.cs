@@ -13,13 +13,13 @@ namespace WpfAlytalo
 
         public Boolean SaunaOn()
         {
-
+            Switched = true;
             return Switched;
         }
 
         public Boolean SaunaOff()
         {
-
+            Switched = false;
             return Switched;
         }
     }
