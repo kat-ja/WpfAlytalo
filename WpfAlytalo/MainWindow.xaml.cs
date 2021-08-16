@@ -32,15 +32,21 @@ namespace WpfAlytalo
         public MainWindow()
         {
             InitializeComponent();
+
             tbOlohuoneInfo.Text = "Olohuoneen valot päällä.";
             olohuone.Switched = true;
             slOlohuone.Value = 100;
+
+            tbKeittioInfo.Text = "Keittiön valot päällä.";
+            keittio.Switched = true;
+            slKeittio.Value = 100;
 
             talo.SetTemperature(22);
             tbLampotilaNyt.Text = talo.Temperature.ToString();
 
             sauna.Switched = false;
             sauna.SaunaTempe = talo.Temperature;
+            lblLampotilaSauna.Content = talo.Temperature.ToString();
 
             SaunanLammitin.Tick += SaunanLammitin_Tick;
             SaunanLammitin.Interval = new TimeSpan(0, 0, 0, 2); // 2 sekuntia -> 1 asteen nousu
@@ -51,7 +57,7 @@ namespace WpfAlytalo
 
         private void SaunanLammitin_Tick(object sender, EventArgs e)
         {
-            if(sauna.SaunaTempe < 26)
+            if(sauna.Switched && sauna.SaunaTempe < 26)
             {
                 sauna.SaunaTempe += 1;
                 lblLampotilaSauna.Content = sauna.SaunaTempe;
@@ -90,7 +96,7 @@ namespace WpfAlytalo
                 olohuone.Switched = true;              
                 tbOlohuoneInfo.Text = "Olohuoneen valot päällä.";
                 slOlohuone.Value = 100;
-            }        
+            }      
         }
 
         private void slOlohuone_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -98,7 +104,6 @@ namespace WpfAlytalo
             var slider = sender as Slider;
 
             olohuone.Dimmer = Math.Round(slider.Value).ToString();
-            lblSlider.Content = olohuone.Dimmer;
             
             if(slider.Value == 0)
             {
@@ -165,6 +170,44 @@ namespace WpfAlytalo
                 btnSauna.Content = "Sauna pois päältä";
                 SaunanLammitin.Start();
                 lblLampotilaSauna.Content = sauna.SaunaTempe;
+            }
+        }
+
+        private void btnKeittio_Click(object sender, RoutedEventArgs e)
+        {
+            if (keittio.Switched)
+            {
+                btnKeittio.Content = "Sytytä valot";
+                keittio.Switched = false;
+                tbKeittioInfo.Text = "Keittiön valot sammutettu.";
+                slKeittio.Value = 0;
+            }
+            else
+            {
+                btnKeittio.Content = "Sammuta valot";
+                keittio.Switched = true;
+                tbKeittioInfo.Text = "Keittiön valot päällä.";
+                slKeittio.Value = 100;
+            }
+        }
+
+        private void slKeittio_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            var slider = sender as Slider;
+
+            keittio.Dimmer = Math.Round(slider.Value).ToString();
+
+            if (slider.Value == 0)
+            {
+                btnKeittio.Content = "Sytytä valot";
+                keittio.Switched = false;
+                tbKeittioInfo.Text = "Keittiön valot sammutettu. Himmentimen asento: " + keittio.Dimmer + ".";
+            }
+            else
+            {
+                btnKeittio.Content = "Sammuta valot";
+                keittio.Switched = true;
+                tbKeittioInfo.Text = "Keittiön valot päällä. Himmentimen asento: " + keittio.Dimmer + "."; ;
             }
         }
     }
