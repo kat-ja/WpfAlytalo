@@ -28,7 +28,6 @@ namespace WpfAlytalo
 
         public DispatcherTimer SaunanLammitin = new DispatcherTimer();
         public DispatcherTimer SaunanKylmetin = new DispatcherTimer();
-        int taloTempSaunaStart;  // talon lämpötila silloin kun saunaa aletaan lämmittää
 
         public MainWindow()
         {
@@ -58,7 +57,7 @@ namespace WpfAlytalo
 
         private void SaunanLammitin_Tick(object sender, EventArgs e)
         {
-            if(sauna.Switched && sauna.SaunaTempe < 26)
+            if(sauna.Switched && sauna.SaunaTempe < 120)
             {
                 sauna.SaunaTempe += 1;
                 lblSaunaInfo.Content = "Saunan lämpötila\n(max 120 °C): " + sauna.SaunaTempe + " °C.";
@@ -67,7 +66,6 @@ namespace WpfAlytalo
             {
                 SaunanLammitin.Stop();
             }
-
         }
         private void SaunanKylmetin_Tick(object sender, EventArgs e)
         {
@@ -80,7 +78,6 @@ namespace WpfAlytalo
             {
                 SaunanKylmetin.Stop();
             }
-
         }
         private void btnOlohuone_Click(object sender, RoutedEventArgs e)
         {
@@ -129,7 +126,7 @@ namespace WpfAlytalo
                 {
                     tbLampotilaNyt.Text = talo.Temperature.ToString() + " °C";
                     sauna.SaunaTempe = talo.Temperature;
-                    lblSaunaInfo.Content = "Saunan lämpötila\n(max 120 °C): " + talo.Temperature.ToString() + " °C.";
+                    lblSaunaInfo.Content = "Saunan lämpötila\n(max 120 °C): " + sauna.SaunaTempe.ToString() + " °C.";  
                     tbLampotilaTavoite.Text = "";
                     lblTavoiteInfo.Content = "";
                 }
@@ -138,16 +135,14 @@ namespace WpfAlytalo
                     lblTavoiteInfo.Content = "Lämpötilan pitää olla luku\nvälillä 5\u201335.";  // \u2013 = en-dash
                     tbLampotilaTavoite.Text = "";
                     tbLampotilaTavoite.Focus();
-                }
-                
+                }          
             }
             catch (Exception)
             {
                 lblTavoiteInfo.Content = "Lämpötilan pitää olla luku\nvälillä 5\u201335.";
                 tbLampotilaTavoite.Text = "";
                 tbLampotilaTavoite.Focus();
-            }
-            
+            }    
         }
         private void btnSauna_Click(object sender, RoutedEventArgs e)
         {
@@ -161,6 +156,7 @@ namespace WpfAlytalo
             else
             {
                 sauna.SaunaOn();
+                sauna.SaunaTempe = talo.Temperature;
                 lblKiuasPaalla.Content = "Kiuas toiminnassa.";
                 btnSauna.Content = "Sauna pois päältä";
                 SaunanLammitin.Start();
