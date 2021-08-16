@@ -120,10 +120,11 @@ namespace WpfAlytalo
         {
             try
             {
-                talo.SetTemperature(int.Parse(tbLampotilaTavoite.Text));
+                int temp = int.Parse(tbLampotilaTavoite.Text);
 
-                if(talo.Temperature >= 5 && talo.Temperature <= 35)
+                if(temp >= 5 && temp <= 35)
                 {
+                    talo.SetTemperature(temp);
                     tbLampotilaNyt.Text = talo.Temperature.ToString() + " °C";
                     sauna.SaunaTempe = talo.Temperature;
                     lblSaunaInfo.Content = "Saunan lämpötila\n(max 120 °C): " + sauna.SaunaTempe.ToString() + " °C.";  
