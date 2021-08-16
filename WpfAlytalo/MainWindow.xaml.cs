@@ -42,11 +42,11 @@ namespace WpfAlytalo
             slKeittio.Value = 100;
 
             talo.SetTemperature(22);
-            tbLampotilaNyt.Text = talo.Temperature.ToString();
+            tbLampotilaNyt.Text = talo.Temperature.ToString()+ " °C";
 
             sauna.Switched = false;
             sauna.SaunaTempe = talo.Temperature;
-            lblLampotilaSauna.Content = talo.Temperature.ToString();
+            lblSaunaInfo.Content = "Saunan lämpötila\n(max 120 °C): "+ talo.Temperature.ToString() + " °C.";
 
             SaunanLammitin.Tick += SaunanLammitin_Tick;
             SaunanLammitin.Interval = new TimeSpan(0, 0, 0, 2); // 2 sekuntia -> 1 asteen nousu
@@ -60,7 +60,7 @@ namespace WpfAlytalo
             if(sauna.Switched && sauna.SaunaTempe < 26)
             {
                 sauna.SaunaTempe += 1;
-                lblLampotilaSauna.Content = sauna.SaunaTempe;
+                lblSaunaInfo.Content = "Saunan lämpötila\n(max 120 °C): " + sauna.SaunaTempe + " °C.";
             }
             else
             {
@@ -73,7 +73,7 @@ namespace WpfAlytalo
             if (sauna.SaunaTempe > talo.Temperature)
             {
                 sauna.SaunaTempe -= 1;
-                lblLampotilaSauna.Content = sauna.SaunaTempe;
+                lblSaunaInfo.Content = "Saunan lämpötila\n(max 120 °C): " + sauna.SaunaTempe + " °C.";
             }
             else
             {
@@ -131,15 +131,15 @@ namespace WpfAlytalo
 
                 if(talo.Temperature >= 5 && talo.Temperature <= 35)
                 {
-                    tbLampotilaNyt.Text = talo.Temperature.ToString();
+                    tbLampotilaNyt.Text = talo.Temperature.ToString() + " °C";
                     sauna.SaunaTempe = talo.Temperature;
-                    lblLampotilaSauna.Content = talo.Temperature.ToString();
+                    lblSaunaInfo.Content = "Saunan lämpötila\n(max 120 °C): " + talo.Temperature.ToString() + " °C.";
                     tbLampotilaTavoite.Text = "";
                     lblTavoiteInfo.Content = "";
                 }
                 else
                 {
-                    lblTavoiteInfo.Content = "Lämpötilan pitää olla luku\nvälillä 5-35.";
+                    lblTavoiteInfo.Content = "Lämpötilan pitää olla luku\nvälillä 5\u201335.";
                     tbLampotilaTavoite.Text = "";
                     tbLampotilaTavoite.Focus();
                 }
@@ -169,7 +169,7 @@ namespace WpfAlytalo
                 lblKiuasPaalla.Content = "Kiuas toiminnassa.";
                 btnSauna.Content = "Sauna pois päältä";
                 SaunanLammitin.Start();
-                lblLampotilaSauna.Content = sauna.SaunaTempe;
+                lblSaunaInfo.Content = "Saunan lämpötila\n(max 120 °C): " + sauna.SaunaTempe + " °C.";
             }
         }
 
